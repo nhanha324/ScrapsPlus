@@ -97,11 +97,20 @@ namespace ScrapsPlus.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
+            var profServ = new ProfileService();
             if (ModelState.IsValid)
             {
+                var profile = new Profile
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    DateOfBirth = model.DateOfBirth,
+                    RecoveryEmail = model.RecoveryEmail
+                };
+                var profileResult = profServ.AddProfile(profile);
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
-                if (result.Succeeded)
+                if (result.Succeeded && (profileResult != null))
                 {
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
