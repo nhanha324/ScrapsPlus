@@ -9,6 +9,5 @@ namespace ScrapsPlus.Models
     {
         public int ID { get; set; }
         public string Level { get; set; }
-        public ICollection<Profile> Profiles { get; set; }
     }
 }

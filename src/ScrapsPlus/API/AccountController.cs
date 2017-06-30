@@ -23,19 +23,22 @@ namespace ScrapsPlus.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
-
+        private readonly ProfileService _profServ;
         public AccountController(
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
-            ILoggerFactory loggerFactory)
+            ILoggerFactory loggerFactory,
+            ProfileService profServ
+            )
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
+            _profServ = profServ;
         }
 
 
@@ -97,7 +100,7 @@ namespace ScrapsPlus.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
-            var profServ = new ProfileService();
+            
             if (ModelState.IsValid)
             {
                 var profile = new Profile
@@ -105,9 +108,10 @@ namespace ScrapsPlus.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     DateOfBirth = model.DateOfBirth,
-                    RecoveryEmail = model.RecoveryEmail
+                    RecoveryEmail = model.RecoveryEmail,
+                    Email = model.Email
                 };
-                var profileResult = profServ.AddProfile(profile);
+                var profileResult = _profServ.AddProfile(profile);
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded && (profileResult != null))

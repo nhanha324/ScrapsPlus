@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace ScrapsPlus.Migrations
 {
-    public partial class start : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -197,6 +197,7 @@ namespace ScrapsPlus.Migrations
                     Address = table.Column<string>(nullable: true),
                     Age = table.Column<int>(nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     JoinDate = table.Column<DateTime>(nullable: false),
                     LastName = table.Column<string>(nullable: true),

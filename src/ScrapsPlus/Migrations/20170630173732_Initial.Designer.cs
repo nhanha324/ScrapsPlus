@@ -8,13 +8,13 @@ using ScrapsPlus.Data;
 namespace ScrapsPlus.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170629235424_start")]
-    partial class start
+    [Migration("20170630173732_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
-                .HasAnnotation("ProductVersion", "1.0.0-rtm-21431")
+                .HasAnnotation("ProductVersion", "1.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
@@ -25,10 +25,10 @@ namespace ScrapsPlus.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Name")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -134,7 +134,7 @@ namespace ScrapsPlus.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<string>("Email")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
 
@@ -143,10 +143,10 @@ namespace ScrapsPlus.Migrations
                     b.Property<DateTimeOffset?>("LockoutEnd");
 
                     b.Property<string>("NormalizedEmail")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("NormalizedUserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.Property<string>("PasswordHash");
 
@@ -159,7 +159,7 @@ namespace ScrapsPlus.Migrations
                     b.Property<bool>("TwoFactorEnabled");
 
                     b.Property<string>("UserName")
-                        .HasAnnotation("MaxLength", 256);
+                        .HasMaxLength(256);
 
                     b.HasKey("Id");
 
@@ -209,6 +209,8 @@ namespace ScrapsPlus.Migrations
                     b.Property<int>("Age");
 
                     b.Property<DateTime>("DateOfBirth");
+
+                    b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
@@ -282,12 +284,12 @@ namespace ScrapsPlus.Migrations
 
             modelBuilder.Entity("ScrapsPlus.Models.Profile", b =>
                 {
-                    b.HasOne("ScrapsPlus.Models.MembershipLevel")
+                    b.HasOne("ScrapsPlus.Models.MembershipLevel", "MembershipLevel")
                         .WithMany("Profiles")
                         .HasForeignKey("MembershipLevelID")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("ScrapsPlus.Models.SubscriptionStatus")
+                    b.HasOne("ScrapsPlus.Models.SubscriptionStatus", "SubscriptionStatus")
                         .WithMany("Profiles")
                         .HasForeignKey("SubscriptionStatusID")
                         .OnDelete(DeleteBehavior.Cascade);

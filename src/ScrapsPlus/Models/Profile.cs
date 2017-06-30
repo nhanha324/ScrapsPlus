@@ -15,6 +15,7 @@ namespace ScrapsPlus.Models
         public string Address { get; set; }
         public DateTime JoinDate { get; set; }
         public DateTime DateOfBirth { get; set; }
+        public string Email { get; set; }
         public string RecoveryEmail { get; set; }
         public int MembershipLevelID { get; set; }
         [ForeignKey("MembershipLevelID")]

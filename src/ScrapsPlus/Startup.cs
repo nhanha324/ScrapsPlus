@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using ScrapsPlus.Data;
 using ScrapsPlus.Models;
 using ScrapsPlus.Services;
+using ScrapsPlus.Infrastructure;
 
 namespace ScrapsPlus
 {
@@ -27,7 +28,7 @@ namespace ScrapsPlus
             if (env.IsDevelopment())
             {
                 // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
-                builder.AddUserSecrets();
+                builder.AddUserSecrets<Startup>();
             }
 
             builder.AddEnvironmentVariables();
@@ -52,11 +53,12 @@ namespace ScrapsPlus
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            
+            services.AddScoped<ProfileService>();
+            services.AddScoped<ProfileRepository>();
 
-            
-                        // add security policies
-                        services.AddAuthorization(options =>
+
+            // add security policies
+            services.AddAuthorization(options =>
                         {
                             options.AddPolicy("AdminOnly", policy => policy.RequireClaim("IsAdmin"));
                         });
