@@ -42,7 +42,7 @@ namespace ScrapsPlus.Controllers
         }
 
 
-        private async Task<UserViewModel> GetUser(string userName)
+        private async Task<Profile> GetUser(string userName)
         {
             var user = await _userManager.FindByNameAsync(userName);
             var claims = await _userManager.GetClaimsAsync(user);
@@ -51,9 +51,16 @@ namespace ScrapsPlus.Controllers
                 UserName = user.UserName,
                 Claims = claims.ToDictionary(c => c.Type, c => c.Value)
             };
-            return vm;
-        }
 
+            var profile = _profServ.GetProfile(vm.UserName);
+            return profile;
+        }
+        [HttpGet("profile")]
+        public Profile Profile(string email)
+        {
+            var profile = _profServ.GetProfile(email);
+            return profile;
+        }
         //
         // POST: /Account/Login
         [HttpPost("login")]

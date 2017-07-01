@@ -23,13 +23,13 @@ namespace ScrapsPlus.Controllers {
         public getExternalLogins() {
             return this.accountService.getExternalLogins();
         }
-
+        
         constructor(private accountService: ScrapsPlus.Services.AccountService, private $location: ng.ILocationService) {
             this.getExternalLogins().then((results) => {
                 this.externalLogins = results;
             });
         }
-    }
+    } 
 
     angular.module('ScrapsPlus').controller('AccountController', AccountController);
 

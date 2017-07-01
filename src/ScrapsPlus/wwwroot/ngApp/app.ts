@@ -43,6 +43,12 @@ namespace ScrapsPlus {
                 controller: ScrapsPlus.Controllers.AboutController,
                 controllerAs: 'controller'
             })
+            .state('profile', {
+                url: '/profile',
+                templateUrl: '/ngApp/views/profile.html',
+                controller: ScrapsPlus.Controllers.ProfileController,
+                controllerAs: 'controller'
+            })
             .state('notFound', {
                 url: '/notFound',
                 templateUrl: '/ngApp/views/notFound.html'

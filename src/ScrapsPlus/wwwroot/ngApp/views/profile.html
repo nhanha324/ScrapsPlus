@@ -1,0 +1,16 @@
+﻿<div>
+    <h1>Profile</h1>
+    <hr />
+
+    <div>
+        <p>Name: {{controller.profile.firstName}} {{controller.profile.lastName}}</p>
+        <p>Email: {{controller.profile.email}}</p>
+        <p>Recovery Email: {{controller.profile.recoveryEmail}}</p>
+        <p>Age: {{controller.profile.age}}</p>
+        <p>Address: {{controller.profile.address}}</p>
+        <p>Date of Birth: {{controller.profile.dateOfBirth | date}}</p>
+        <p>Joined: {{controller.profile.joinDate | date}}</p>
+        <p>Membership Level: {{controller.profile.memberShipLevel}}</p>
+        <p>Subscription Status: {{controller.profile.subscriptionStatus}}</p>
+    </div>
+</div>

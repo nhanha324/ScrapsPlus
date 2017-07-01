@@ -5,12 +5,19 @@ namespace ScrapsPlus.Services {
         // Store access token and claims in browser session storage
         private storeUserInfo(userInfo) {
             // store user name
-            this.$window.sessionStorage.setItem('userName', userInfo.userName);
+            console.log(userInfo);
+            this.$window.sessionStorage.setItem('userEmail', userInfo.email);
+            this.$window.sessionStorage.setItem('userName', userInfo.firstName);
 
             // store claims
             this.$window.sessionStorage.setItem('claims', JSON.stringify(userInfo.claims));
         }
-
+        public getUser(email) {
+            
+        }
+        public getUserEmail() {
+            return this.$window.sessionStorage.getItem('userEmail');
+        }
         public getUserName() {
             return this.$window.sessionStorage.getItem('userName');
         }
@@ -21,10 +28,28 @@ namespace ScrapsPlus.Services {
             return allClaims ? allClaims[type] : null;
         }
 
+        public getProfile(email) {
+            console.log(email);
+            var profile;
+            return this.$q((resolve, reject) => {
+                this.$http.get('/api/account/profile', { params: { email: email}}).then((result) => {
+                    console.log(result.data);
+                    //this.storeUserInfo(result.data);
+                    //profile = result.data;
+                    resolve(result.data);
+                }).catch((result) => {
+                    var messages = this.flattenValidation(result.data);
+                    reject(messages);
+                });
+            });
+            //console.log(profile);
+            //return profile;
+        }
 
         public login(loginUser) {
             return this.$q((resolve, reject) => {
                 this.$http.post('/api/account/login', loginUser).then((result) => {
+                    console.log(result.data);
                         this.storeUserInfo(result.data);
                         resolve();
                 }).catch((result) => {
@@ -32,6 +57,7 @@ namespace ScrapsPlus.Services {
                     reject(messages);
                 });
             });
+            
         }
 
         public register(userLogin) {

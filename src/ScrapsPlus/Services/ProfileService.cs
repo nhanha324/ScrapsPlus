@@ -38,5 +38,14 @@ namespace ScrapsPlus.Services
             db.SaveChanges();
             return profile;
         }
+
+        public Profile GetProfile(string email)
+        {
+            var profile = (from p in db.List()
+                           where email == p.Email
+                           select p).FirstOrDefault();
+
+            return profile;
+        }
     }
 }
