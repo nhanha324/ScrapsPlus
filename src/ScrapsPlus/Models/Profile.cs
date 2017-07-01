@@ -18,11 +18,8 @@ namespace ScrapsPlus.Models
         public string Email { get; set; }
         public string RecoveryEmail { get; set; }
         public int MembershipLevelID { get; set; }
-        [ForeignKey("MembershipLevelID")]
         public MembershipLevel MembershipLevel { get; set; }
-
         public int SubscriptionStatusID { get; set; }
-        [ForeignKey("SubscriptionStatusID")]
         public SubscriptionStatus SubscriptionStatus { get; set; }
     }
 }

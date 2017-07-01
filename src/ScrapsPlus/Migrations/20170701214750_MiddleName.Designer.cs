@@ -8,8 +8,8 @@ using ScrapsPlus.Data;
 namespace ScrapsPlus.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20170630173732_Initial")]
-    partial class Initial
+    [Migration("20170701214750_MiddleName")]
+    partial class MiddleName
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -220,6 +220,8 @@ namespace ScrapsPlus.Migrations
 
                     b.Property<int>("MembershipLevelID");
 
+                    b.Property<string>("MiddleName");
+
                     b.Property<string>("RecoveryEmail");
 
                     b.Property<int>("SubscriptionStatusID");
@@ -285,12 +287,12 @@ namespace ScrapsPlus.Migrations
             modelBuilder.Entity("ScrapsPlus.Models.Profile", b =>
                 {
                     b.HasOne("ScrapsPlus.Models.MembershipLevel", "MembershipLevel")
-                        .WithMany("Profiles")
+                        .WithMany()
                         .HasForeignKey("MembershipLevelID")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("ScrapsPlus.Models.SubscriptionStatus", "SubscriptionStatus")
-                        .WithMany("Profiles")
+                        .WithMany()
                         .HasForeignKey("SubscriptionStatusID")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
