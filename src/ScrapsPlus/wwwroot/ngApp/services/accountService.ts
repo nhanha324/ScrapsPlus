@@ -5,7 +5,6 @@ namespace ScrapsPlus.Services {
         // Store access token and claims in browser session storage
         private storeUserInfo(userInfo) {
             // store user name
-            console.log(userInfo);
             this.$window.sessionStorage.setItem('userEmail', userInfo.email);
             this.$window.sessionStorage.setItem('userName', userInfo.firstName);
 
@@ -26,24 +25,6 @@ namespace ScrapsPlus.Services {
         public getClaim(type) {
             var allClaims = JSON.parse(this.$window.sessionStorage.getItem('claims'));
             return allClaims ? allClaims[type] : null;
-        }
-
-        public getProfile(email) {
-            console.log(email);
-            var profile;
-            return this.$q((resolve, reject) => {
-                this.$http.get('/api/account/profile', { params: { email: email}}).then((result) => {
-                    console.log(result.data);
-                    //this.storeUserInfo(result.data);
-                    //profile = result.data;
-                    resolve(result.data);
-                }).catch((result) => {
-                    var messages = this.flattenValidation(result.data);
-                    reject(messages);
-                });
-            });
-            //console.log(profile);
-            //return profile;
         }
 
         public login(loginUser) {

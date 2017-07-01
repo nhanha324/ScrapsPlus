@@ -55,6 +55,8 @@ namespace ScrapsPlus
             services.AddTransient<ISmsSender, AuthMessageSender>();
             services.AddScoped<ProfileService>();
             services.AddScoped<ProfileRepository>();
+            services.AddScoped<SubscriptionStausRepository>();
+            services.AddScoped<MembershipRepository>();
 
 
             // add security policies

@@ -11,6 +11,7 @@ using Microsoft.Extensions.Logging;
 using ScrapsPlus.Models;
 using ScrapsPlus.Services;
 using ScrapsPlus.ViewModels.Account;
+using ScrapsPlus.API.NewFolder.ViewModels;
 
 namespace ScrapsPlus.Controllers
 {
@@ -56,10 +57,23 @@ namespace ScrapsPlus.Controllers
             return profile;
         }
         [HttpGet("profile")]
-        public Profile Profile(string email)
+        public ProfileViewModel Profile(string email)
         {
             var profile = _profServ.GetProfile(email);
-            return profile;
+            var profileViewModel = new ProfileViewModel
+            {
+                FirstName = profile.FirstName,
+                LastName = profile.LastName,
+                Address = profile.Address,
+                Age = profile.Age,
+                DateOfBirth = profile.DateOfBirth,
+                Email = profile.Email,
+                JoinDate = profile.JoinDate,
+                MembershipLevel = profile.MembershipLevel.Level,
+                RecoveryEmail = profile.RecoveryEmail,
+                SubscriptionStatus = profile.SubscriptionStatus.Status
+            };
+            return profileViewModel;
         }
         //
         // POST: /Account/Login
@@ -107,7 +121,7 @@ namespace ScrapsPlus.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody]RegisterViewModel model)
         {
-            
+
             if (ModelState.IsValid)
             {
                 var profile = new Profile
@@ -172,7 +186,8 @@ namespace ScrapsPlus.Controllers
         [HttpGet("GetExternalLogins")]
         public IEnumerable<ExternalLoginViewModel> GetExternalLogins()
         {
-            return _signInManager.GetExternalAuthenticationSchemes().Select(a => new ExternalLoginViewModel {
+            return _signInManager.GetExternalAuthenticationSchemes().Select(a => new ExternalLoginViewModel
+            {
                 DisplayName = a.DisplayName,
                 AuthenticationScheme = a.AuthenticationScheme
             });
@@ -262,7 +277,7 @@ namespace ScrapsPlus.Controllers
                 AddErrors(result);
             }
 
-           // ViewData["ReturnUrl"] = returnUrl;
+            // ViewData["ReturnUrl"] = returnUrl;
             return BadRequest(this.ModelState);
         }
 

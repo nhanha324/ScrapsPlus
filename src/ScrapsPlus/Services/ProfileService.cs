@@ -10,10 +10,14 @@ namespace ScrapsPlus.Services
 {
     public class ProfileService
     {
-        private ProfileRepository db;
-        public ProfileService(ProfileRepository profRepo)
+        private ProfileRepository profiles;
+        private MembershipRepository memLevels;
+        private SubscriptionStausRepository subStatus;
+        public ProfileService(ProfileRepository profRepo, MembershipRepository memRepo, SubscriptionStausRepository subRepo)
         {
-            db = profRepo;
+            profiles = profRepo;
+            memLevels = memRepo;
+            subStatus = subRepo;
         }
 
         public Profile AddProfile(Profile newProfile) {
@@ -34,17 +38,31 @@ namespace ScrapsPlus.Services
             {
                 Status = "Inactive"
             };
-            db.Add(profile);
-            db.SaveChanges();
+            profiles.Add(profile);
+            profiles.SaveChanges();
             return profile;
         }
 
         public Profile GetProfile(string email)
         {
-            var profile = (from p in db.List()
+            var profile = (from p in profiles.List()
                            where email == p.Email
-                           select p).FirstOrDefault();
-
+                           select new Profile
+                           {
+                               FirstName = p.FirstName,
+                               LastName = p.LastName,
+                               MembershipLevel = memLevels.GetMembershipLevel(p.MembershipLevelID),
+                               DateOfBirth = p.DateOfBirth,
+                               MembershipLevelID = p.MembershipLevelID,
+                               Address = p.Address,
+                               Age = p.Age,
+                               Email = p.Email,
+                               ID = p.ID,
+                               JoinDate = p.JoinDate,
+                               RecoveryEmail = p.RecoveryEmail,
+                               SubscriptionStatusID = p.SubscriptionStatusID,
+                               SubscriptionStatus = subStatus.GetSubscriptionStatus(p.SubscriptionStatusID)
+                           }).FirstOrDefault();
             return profile;
         }
     }

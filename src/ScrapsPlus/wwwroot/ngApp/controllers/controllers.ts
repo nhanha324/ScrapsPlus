@@ -30,6 +30,7 @@ namespace ScrapsPlus.Controllers {
         getProfile(email) {
             this.$http.get('/api/account/profile', { params: { email: email } }).then((result) => {
                 this.profile = result.data;
+                console.log(this.profile);
             }).catch((result) => {
                 var messages = result.data;
                 console.log(messages);
