@@ -31,12 +31,18 @@ namespace ScrapsPlus {
                 controller: ScrapsPlus.Controllers.RegisterController,
                 controllerAs: 'controller'
             })
+            .state('registerPartTwo', {
+                url: '/registerPartTwo',
+                templateUrl: '/ngApp/views/registerPartTwo.html',
+                controller: ScrapsPlus.Controllers.RegisterController,
+                controllerAs: 'controller'
+            })
             .state('externalRegister', {
                 url: '/externalRegister',
                 templateUrl: '/ngApp/views/externalRegister.html',
                 controller: ScrapsPlus.Controllers.ExternalRegisterController,
                 controllerAs: 'controller'
-            }) 
+            })
             .state('about', {
                 url: '/about',
                 templateUrl: '/ngApp/views/about.html',
@@ -49,6 +55,49 @@ namespace ScrapsPlus {
                 controller: ScrapsPlus.Controllers.ProfileController,
                 controllerAs: 'controller'
             })
+            .state('admin', {
+                url: '/admin',
+                templateUrl: '/ngApp/views/adminHomePage.html',
+                controller: ScrapsPlus.Controllers.AboutController,
+                controllerAs: 'controller'
+            })
+            .state('customerHome', {
+                url: '/customerHome',
+                templateUrl: '/ngApp/views/customerHomePage.html',
+                controller: ScrapsPlus.Controllers.AboutController,
+                controllerAs: 'controller'
+            })
+            .state('subscription', {
+                url: '/subscription',
+                templateUrl: '/ngApp/views/subscription.html',
+                controller: ScrapsPlus.Controllers.AboutController,
+                controllerAs: 'controller'
+            })
+            .state('bronze', {
+                url: '/bronze',
+                templateUrl: '/ngApp/views/bronzeOption.html',
+                controller: ScrapsPlus.Controllers.AboutController,
+                controllerAs: 'controller'
+            })
+            .state('silver', {
+                url: '/silver',
+                templateUrl: '/ngApp/views/silverOption.html',
+                controller: ScrapsPlus.Controllers.AboutController,
+                controllerAs: 'controller'
+            })
+            .state('gold', {
+                url: '/gold',
+                templateUrl: '/ngApp/views/goldOption.html',
+                controller: ScrapsPlus.Controllers.AboutController,
+                controllerAs: 'controller'
+            })
+            .state('checkOut', {
+                url: '/checkOut',
+                templateUrl: '/ngApp/views/checkOut.html',
+                controller: ScrapsPlus.Controllers.AboutController,
+                controllerAs: 'controller'
+            })
+
             .state('notFound', {
                 url: '/notFound',
                 templateUrl: '/ngApp/views/notFound.html'
@@ -61,7 +110,7 @@ namespace ScrapsPlus {
         $locationProvider.html5Mode(true);
     });
 
-    
+
     angular.module('ScrapsPlus').factory('authInterceptor', (
         $q: ng.IQService,
         $window: ng.IWindowService,
@@ -86,6 +135,6 @@ namespace ScrapsPlus {
         $httpProvider.interceptors.push('authInterceptor');
     });
 
-    
+
 
 }

@@ -10,7 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="wwwroot\ngApp\controllers\customerHomeController.ts" />
+    <Content Include="wwwroot\ngApp\views\adminHomePage.html" />
+    <Content Include="wwwroot\ngApp\views\bronzeOption.html" />
+    <Content Include="wwwroot\ngApp\views\checkOut.html" />
+    <Content Include="wwwroot\ngApp\views\customerHomePage.html" />
+    <Content Include="wwwroot\ngApp\views\goldOption.html" />
+    <Content Include="wwwroot\ngApp\views\PaymentInfo.html" />
     <Content Include="wwwroot\ngApp\views\profile.html" />
+    <Content Include="wwwroot\ngApp\views\registerPartTwo.html" />
+    <Content Include="wwwroot\ngApp\views\silverOption.html" />
+    <Content Include="wwwroot\ngApp\views\subscription.html" />
   </ItemGroup>
 
   <ItemGroup>
