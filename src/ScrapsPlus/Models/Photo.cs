@@ -10,5 +10,6 @@ namespace ScrapsPlus.Models
         public int ID { get; set; }
         public byte[] Image { get; set; }
         public int ProfileID { get; set; }
+        public int AlbumID { get; set; }
     }
 }
